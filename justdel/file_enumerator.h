@@ -21,7 +21,10 @@ class file_enumerator {
   bool next(info_t *fi_ptr);
 
  private:
-  inline bool is_dir(const WIN32_FIND_DATA &wfd) const { return !!(wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY); }
+  inline bool is_dir(const WIN32_FIND_DATA &wfd) const { 
+    return (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) &&
+      !(wfd.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT);
+  }
   inline bool is_period_path(const WIN32_FIND_DATA &wfd) const;
 
   std::list<HANDLE> hfind_;
