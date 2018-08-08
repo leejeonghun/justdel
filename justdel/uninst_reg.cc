@@ -35,7 +35,7 @@ bool uninst_reg::remove() const {
 
   HKEY hkey = NULL;
   if (RegOpenKeyEx(HKEY_CURRENT_USER, regkey_, 0,
-    KEY_ALL_ACCESS, &hkey) == ERROR_SUCCESS && hkey != NULL) {
+      KEY_ALL_ACCESS, &hkey) == ERROR_SUCCESS && hkey != NULL) {
     remove_reg = RegDeleteTree(hkey, nullptr) == ERROR_SUCCESS;
     RegCloseKey(hkey);
   }

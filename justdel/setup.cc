@@ -42,7 +42,8 @@ bool setup::run() const {
       success = ShellExecute(GetForegroundWindow(), L"runas", bin_path_,
         nullptr, nullptr, SW_SHOWNORMAL) != FALSE;
     } else {
-      success = (send_to_lnk.chk_exist() ? send_to_lnk.remove() : true) &&
+      success = IsUserAnAdmin() != FALSE &&
+        (send_to_lnk.chk_exist() ? send_to_lnk.remove() : true) &&
         remove_app() && reg.remove();
       result_msg = success ? L"Uninstall Complete." : L"Uninstall Failed.";
     }
